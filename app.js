@@ -1,12 +1,15 @@
-import  {EventEmitter} from 'events';
+import  { EventEmitter } from 'events';
 import os from 'os';
 import { parseUsername } from './utils/parseUsername.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
+	process.stdout.write(`Enter command:`);
 } 
 
+
 const username = parseUsername(process.argv[2]);
+let currentDir = os.homedir();
 welcomeUser(username);
 
 
@@ -21,5 +24,6 @@ process.on('SIGINT', () => emitter.emit('.exit'));
 
 process.stdin.on('data', (data) => {
 	const [command, ...args] = data.toString().replace(os.EOL, '').replace('\n', '').split(' ');
-	emitter.emit(command, args);
+	const commandIsCorrect = emitter.emit(command, args);
+	if(!commandIsCorrect) process.stdout.write("Invalid opration\n");
 });
