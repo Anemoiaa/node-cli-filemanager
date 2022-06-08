@@ -5,6 +5,10 @@ import { parseUsername } from './utils/parseUsername.js';
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
 	process.stdout.write(`Enter command:`);
+}
+
+const displayCurrentDir = () => {
+	process.stdout.write(`You are currently in ${currentDir}\nEnter command:`);
 } 
 
 
@@ -26,4 +30,5 @@ process.stdin.on('data', (data) => {
 	const [command, ...args] = data.toString().replace(os.EOL, '').replace('\n', '').split(' ');
 	const commandIsCorrect = emitter.emit(command, args);
 	if(!commandIsCorrect) process.stdout.write("Invalid opration\n");
+	displayCurrentDir();
 });
