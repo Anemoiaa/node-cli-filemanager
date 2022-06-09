@@ -27,6 +27,7 @@ emitter.on('up', () => {
 
 emitter.on('cd', (args) => {
 	const src = args[0];
+	if (!src) return;
 	currentDir = nav.changeDir(currentDir, src);
 });
 
