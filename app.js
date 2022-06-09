@@ -1,15 +1,16 @@
 import  { EventEmitter } from 'events';
 import os from 'os';
 import { parseUsername } from './utils/parseUsername.js';
+import * as nav from './navigation.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
-	process.stdout.write(`Enter command:`);
-}
+	displayCurrentDir();
+};
 
 const displayCurrentDir = () => {
-	process.stdout.write(`You are currently in ${currentDir}\nEnter command:`);
-} 
+	process.stdout.write(`\nYou are currently in ${currentDir}\nEnter command:\n`);
+};
 
 
 const username = parseUsername(process.argv[2]);
@@ -19,8 +20,14 @@ welcomeUser(username);
 
 const emitter = new EventEmitter();
 
+
+emitter.on('up', () => {
+	currentDir = nav.up(currentDir)
+});
+
+
 emitter.once('.exit', () => {
-	process.stdout.write(`Thank you for using File Manager, ${username}!`);
+	process.stdout.write(`\nThank you for using File Manager, ${username}!`);
 	process.exit(0);
 });
 
