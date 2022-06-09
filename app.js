@@ -44,6 +44,14 @@ emitter.on('cat', (args) => {
 	fs_oper.read(currentDir, src, displayCurrentDir);
 });
 
+emitter.on('add', (args) => {
+	const filename = args[0];
+	if(!filename) return;
+	fs_oper.create(currentDir, filename, displayCurrentDir);
+});
+
+
+
 emitter.once('.exit', () => {
 	process.stdout.write(`\nThank you for using File Manager, ${username}!`);
 	process.exit(0);

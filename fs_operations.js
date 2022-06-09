@@ -12,3 +12,11 @@ export const read = async (currentDir, src, cb) => {
         cb();
     });
 };
+
+export const create = async (currentDir, filename, cb) => {
+    fs.writeFile(path.join(currentDir, filename), '', { flag: 'wx'}, (err) => {
+        if (err) console.error("Operation failed");
+        else console.log(`${filename} created`);
+        cb();
+    });
+};
