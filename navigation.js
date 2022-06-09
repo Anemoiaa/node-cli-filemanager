@@ -20,3 +20,8 @@ export const changeDir = (currentDir, src) => {
 	return currentDir;
 
 };
+
+export const list = (currentDir) => {
+	const files = fs.readdirSync(currentDir);
+	 files.forEach(file => console.log(file));
+};

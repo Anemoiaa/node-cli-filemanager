@@ -30,6 +30,10 @@ emitter.on('cd', (args) => {
 	currentDir = nav.changeDir(currentDir, src);
 });
 
+emitter.on('ls', () => {
+	nav.list(currentDir);
+});
+
 
 emitter.once('.exit', () => {
 	process.stdout.write(`\nThank you for using File Manager, ${username}!`);
