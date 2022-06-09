@@ -25,6 +25,11 @@ emitter.on('up', () => {
 	currentDir = nav.up(currentDir)
 });
 
+emitter.on('cd', (args) => {
+	const src = args[0];
+	currentDir = nav.changeDir(currentDir, src);
+});
+
 
 emitter.once('.exit', () => {
 	process.stdout.write(`\nThank you for using File Manager, ${username}!`);
