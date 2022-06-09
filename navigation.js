@@ -21,13 +21,12 @@ export const changeDir = (currentDir, src) => {
 
 };
 
-export const list = (currentDir) => {
-	
-	try {
-		const files = fs.readdirSync(currentDir);
-		files.forEach(file => console.log(file));
-	} catch (err) {
-		console.error("Operation failed");
-	}
-	
+export const list = (currentDir, cb) => {
+	fs.readdir(currentDir, (err, files) => {
+        if (err) console.error("Operation failed");;
+        files.forEach(file => {
+            console.log(file);
+        });
+        cb();
+    });	
 };

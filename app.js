@@ -22,17 +22,19 @@ const emitter = new EventEmitter();
 
 
 emitter.on('up', () => {
-	currentDir = nav.up(currentDir)
+	currentDir = nav.up(currentDir);
+	displayCurrentDir();
 });
 
 emitter.on('cd', (args) => {
 	const src = args[0];
 	if (!src) return;
 	currentDir = nav.changeDir(currentDir, src);
+	displayCurrentDir();
 });
 
 emitter.on('ls', () => {
-	nav.list(currentDir);
+	nav.list(currentDir, displayCurrentDir);
 });
 
 
@@ -47,5 +49,4 @@ process.stdin.on('data', (data) => {
 	const [command, ...args] = data.toString().replace(os.EOL, '').replace('\n', '').split(' ');
 	const commandIsCorrect = emitter.emit(command, args);
 	if(!commandIsCorrect) process.stdout.write("Invalid opration\n");
-	displayCurrentDir();
 });
