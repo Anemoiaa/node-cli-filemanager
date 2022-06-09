@@ -2,6 +2,7 @@ import  { EventEmitter } from 'events';
 import os from 'os';
 import { parseUsername } from './utils/parseUsername.js';
 import * as nav from './navigation.js';
+import * as fs_oper from './fs_operations.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
@@ -37,6 +38,11 @@ emitter.on('ls', () => {
 	nav.list(currentDir, displayCurrentDir);
 });
 
+emitter.on('cat', (args) => {
+	const src = args[0];
+	if(!src) return;
+	fs_oper.read(currentDir, src, displayCurrentDir);
+});
 
 emitter.once('.exit', () => {
 	process.stdout.write(`\nThank you for using File Manager, ${username}!`);
