@@ -35,5 +35,16 @@ export const rename = async (currentDir, pathToFile, new_filename, cb) => {
         });
     }
     cb();
+};
 
+export const remove = async (currentDir, filename, cb) => {
+    const src = path.join(currentDir, filename);
+    fs.rm(src, (err) => {
+        if (err) {
+            console.error("Operation failed");
+            return;
+        }
+        console.log(`${filename} deleted`);
+        cb();
+    });
 };

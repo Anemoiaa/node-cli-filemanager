@@ -56,6 +56,12 @@ emitter.on('rn', (args) => {
 	fs_oper.rename(currentDir, pathToFile, new_filename, displayCurrentDir);
 });
 
+emitter.on('rm', (args) => {
+	const filename = args[0];
+	if(!filename) return;
+	fs_oper.remove(currentDir, filename, displayCurrentDir);
+});
+
 
 
 emitter.once('.exit', () => {
