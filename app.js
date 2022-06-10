@@ -1,6 +1,7 @@
 import  { EventEmitter } from 'events';
 import os from 'os';
 import { parseUsername } from './utils/parseUsername.js';
+import { displayCurrentDir } from './utils/displayCurrentDir.js';
 import * as nav from './navigation.js';
 import * as fs_oper from './fs_operations.js';
 import * as os_info from './get_os_info.js';
@@ -8,32 +9,27 @@ import { calculateHash } from './calcHash.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
-	displayCurrentDir();
 };
-
-const displayCurrentDir = () => {
-	process.stdout.write(`\nYou are currently in ${currentDir}\nEnter command:\n`);
-};
-
 
 const username = parseUsername(process.argv[2]);
 let currentDir = os.homedir();
+
 welcomeUser(username);
+displayCurrentDir(currentDir);
+
 
 
 const emitter = new EventEmitter();
 
-
 emitter.on('up', () => {
 	currentDir = nav.up(currentDir);
-	displayCurrentDir();
+	displayCurrentDir(currentDir);
 });
 
 emitter.on('cd', (args) => {
 	const src = args[0];
-	if (!src) return;
 	currentDir = nav.changeDir(currentDir, src);
-	displayCurrentDir();
+	displayCurrentDir(currentDir);
 });
 
 emitter.on('ls', () => {
