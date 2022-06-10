@@ -37,6 +37,14 @@ export const rename = async (currentDir, pathToFile, new_filename, cb) => {
     cb();
 };
 
+export const move = async (currentDir, pathToFile, pathToNewDir, cb) => {
+    pathToNewDir = path.isAbsolute(pathToNewDir) ?  path.normalize(pathToNewDir) : path.join(currentDir, pathToNewDir);
+    let filename = path.basename(pathToFile);
+    await remove(currentDir, pathToFile, () => {});
+    await create(pathToNewDir, filename, cb);
+};
+
+
 export const remove = async (currentDir, filename, cb) => {
     const src = path.join(currentDir, filename);
     fs.rm(src, (err) => {

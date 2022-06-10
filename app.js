@@ -62,6 +62,13 @@ emitter.on('rm', (args) => {
 	fs_oper.remove(currentDir, filename, displayCurrentDir);
 });
 
+emitter.on('mv', (args) => {
+	const [pathToFile, pathToNewDir] = args;
+	if(!pathToFile && !pathToNewDir) return;
+	fs_oper.move(currentDir, pathToFile, pathToNewDir,displayCurrentDir);
+});
+
+
 
 
 emitter.once('.exit', () => {
