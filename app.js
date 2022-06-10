@@ -33,38 +33,38 @@ emitter.on('cd', (args) => {
 });
 
 emitter.on('ls', () => {
-	nav.list(currentDir, displayCurrentDir);
+	nav.list(currentDir);
 });
 
 emitter.on('cat', (args) => {
 	const src = args[0];
-	fs_oper.read(currentDir, src, displayCurrentDir);
+	fs_oper.read(currentDir, src);
 });
 
 emitter.on('add', (args) => {
 	const filename = args[0];
-	fs_oper.create(currentDir, filename, displayCurrentDir);
+	fs_oper.create(currentDir, filename);
 });
 
 emitter.on('rn', (args) => {
 	const [pathToFile, new_filename] = args;
-	fs_oper.rename(currentDir, pathToFile, new_filename, displayCurrentDir);
+	fs_oper.rename(currentDir, pathToFile, new_filename);
 });
 
 emitter.on('rm', (args) => {
 	const filename = args[0];
-	fs_oper.remove(currentDir, filename, displayCurrentDir);
+	fs_oper.remove(currentDir, filename);
 });
 
 emitter.on('cp', (args) => {
 	const [pathToFile, pathToNewDir] = args;
-	fs_oper.copy(currentDir, pathToFile, pathToNewDir, displayCurrentDir);
+	fs_oper.copy(currentDir, pathToFile, pathToNewDir);
 });
 
 
 emitter.on('mv', (args) => {
 	const [pathToFile, pathToNewDir] = args;
-	fs_oper.move(currentDir, pathToFile, pathToNewDir,displayCurrentDir);
+	fs_oper.move(currentDir, pathToFile, pathToNewDir);
 });
 
 
@@ -75,8 +75,7 @@ emitter.on('os', (args) => {
 
 emitter.on('hash', (args) => {
 	const pathToFile = args[0];
-	if(!pathToFile) return;
-	calculateHash(currentDir, pathToFile, displayCurrentDir);
+	calculateHash(currentDir, pathToFile);
 
 });
 
