@@ -3,6 +3,7 @@ import os from 'os';
 import { parseUsername } from './utils/parseUsername.js';
 import * as nav from './navigation.js';
 import * as fs_oper from './fs_operations.js';
+import * as os_info from './get_os_info.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
@@ -75,6 +76,11 @@ emitter.on('mv', (args) => {
 	fs_oper.move(currentDir, pathToFile, pathToNewDir,displayCurrentDir);
 });
 
+
+emitter.on('os', (args) => {
+	os_info.get(args[0]);
+	displayCurrentDir();
+});
 
 
 
