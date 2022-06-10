@@ -38,38 +38,32 @@ emitter.on('ls', () => {
 
 emitter.on('cat', (args) => {
 	const src = args[0];
-	if(!src) return;
 	fs_oper.read(currentDir, src, displayCurrentDir);
 });
 
 emitter.on('add', (args) => {
 	const filename = args[0];
-	if(!filename) return;
 	fs_oper.create(currentDir, filename, displayCurrentDir);
 });
 
 emitter.on('rn', (args) => {
 	const [pathToFile, new_filename] = args;
-	if (!pathToFile || !new_filename) return;
 	fs_oper.rename(currentDir, pathToFile, new_filename, displayCurrentDir);
 });
 
 emitter.on('rm', (args) => {
 	const filename = args[0];
-	if(!filename) return;
 	fs_oper.remove(currentDir, filename, displayCurrentDir);
 });
 
 emitter.on('cp', (args) => {
 	const [pathToFile, pathToNewDir] = args;
-	if(!pathToFile && !pathToNewDir) return;
 	fs_oper.copy(currentDir, pathToFile, pathToNewDir, displayCurrentDir);
 });
 
 
 emitter.on('mv', (args) => {
 	const [pathToFile, pathToNewDir] = args;
-	if(!pathToFile && !pathToNewDir) return;
 	fs_oper.move(currentDir, pathToFile, pathToNewDir,displayCurrentDir);
 });
 
