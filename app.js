@@ -4,6 +4,7 @@ import { parseUsername } from './utils/parseUsername.js';
 import * as nav from './navigation.js';
 import * as fs_oper from './fs_operations.js';
 import * as os_info from './get_os_info.js';
+import { calculateHash } from './calcHash.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
@@ -82,6 +83,12 @@ emitter.on('os', (args) => {
 	displayCurrentDir();
 });
 
+emitter.on('hash', (args) => {
+	const pathToFile = args[0];
+	if(!pathToFile) return;
+	calculateHash(currentDir, pathToFile, displayCurrentDir);
+
+});
 
 
 emitter.once('.exit', () => {
