@@ -2,8 +2,8 @@ import os from 'os';
 
 
 export const get = (arg) => {
-	const fn = args[arg];
 	try {
+		const fn = args[arg];
 		fn();
 	} catch {
 		process.stdout.write("Invalid opration\n");

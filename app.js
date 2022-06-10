@@ -70,7 +70,7 @@ emitter.on('mv', (args) => {
 
 emitter.on('os', (args) => {
 	os_info.get(args[0]);
-	displayCurrentDir();
+	displayCurrentDir(currentDir);
 });
 
 emitter.on('hash', (args) => {
