@@ -2,6 +2,7 @@ import  { EventEmitter } from 'events';
 import os from 'os';
 import { parseUsername } from './utils/parseUsername.js';
 import * as nav from './navigation.js';
+import * as fs_oper from './fs_operations.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
@@ -36,6 +37,45 @@ emitter.on('cd', (args) => {
 emitter.on('ls', () => {
 	nav.list(currentDir, displayCurrentDir);
 });
+
+emitter.on('cat', (args) => {
+	const src = args[0];
+	if(!src) return;
+	fs_oper.read(currentDir, src, displayCurrentDir);
+});
+
+emitter.on('add', (args) => {
+	const filename = args[0];
+	if(!filename) return;
+	fs_oper.create(currentDir, filename, displayCurrentDir);
+});
+
+emitter.on('rn', (args) => {
+	const [pathToFile, new_filename] = args;
+	if (!pathToFile || !new_filename) return;
+	fs_oper.rename(currentDir, pathToFile, new_filename, displayCurrentDir);
+});
+
+emitter.on('rm', (args) => {
+	const filename = args[0];
+	if(!filename) return;
+	fs_oper.remove(currentDir, filename, displayCurrentDir);
+});
+
+emitter.on('cp', (args) => {
+	const [pathToFile, pathToNewDir] = args;
+	if(!pathToFile && !pathToNewDir) return;
+	fs_oper.copy(currentDir, pathToFile, pathToNewDir, displayCurrentDir);
+});
+
+
+emitter.on('mv', (args) => {
+	const [pathToFile, pathToNewDir] = args;
+	if(!pathToFile && !pathToNewDir) return;
+	fs_oper.move(currentDir, pathToFile, pathToNewDir,displayCurrentDir);
+});
+
+
 
 
 emitter.once('.exit', () => {
