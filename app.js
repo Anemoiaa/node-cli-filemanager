@@ -50,6 +50,12 @@ emitter.on('add', (args) => {
 	fs_oper.create(currentDir, filename, displayCurrentDir);
 });
 
+emitter.on('rn', (args) => {
+	const [pathToFile, new_filename] = args;
+	if (!pathToFile || !new_filename) return;
+	fs_oper.rename(currentDir, pathToFile, new_filename, displayCurrentDir);
+});
+
 
 
 emitter.once('.exit', () => {
