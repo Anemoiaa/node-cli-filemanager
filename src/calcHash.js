@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import { displayCurrentDir } from './utils/displayCurrentDir.js';
+import { displayCurrentDir } from '../utils/displayCurrentDir.js';
 
 export const calculateHash = async (currentDir, pathToFile, cb) => {
     try {

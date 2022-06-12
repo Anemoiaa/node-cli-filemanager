@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { displayCurrentDir } from './utils/displayCurrentDir.js';
+import { displayCurrentDir } from '../utils/displayCurrentDir.js';
 
 
 export const read = async (currentDir, src) => {
@@ -67,7 +67,7 @@ export const move = async (currentDir, pathToFile, pathToNewDir) => {
     }
     let filename = path.basename(pathToFile);
     await remove(currentDir, pathToFile);
-    await create(pathToNewDir, filename);
+    await create(currentDir, filename);
 };
 
 export const copy = async(currentDir, pathToFile, pathToNewDir) => {

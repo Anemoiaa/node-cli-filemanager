@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { displayCurrentDir } from './utils/displayCurrentDir.js';
+import { displayCurrentDir } from '../utils/displayCurrentDir.js';
 export const up = (currentDir) => {
 	const newPath = path.resolve(currentDir, '../');
 	if (fs.existsSync(newPath)) {

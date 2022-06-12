@@ -2,11 +2,11 @@ import  { EventEmitter } from 'events';
 import os from 'os';
 import { parseUsername } from './utils/parseUsername.js';
 import { displayCurrentDir } from './utils/displayCurrentDir.js';
-import * as nav from './navigation.js';
-import * as fs_oper from './fs_operations.js';
-import * as os_info from './get_os_info.js';
-import { calculateHash } from './calcHash.js';
-import * as zip from './zip.js';
+import * as nav from './src/navigation.js';
+import * as fs_oper from './src/fs_operations.js';
+import * as os_info from './src/get_os_info.js';
+import { calculateHash } from './src/calcHash.js';
+import * as zip from './src/zip.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);

@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import zlib  from 'zlib';
-import { displayCurrentDir } from './utils/displayCurrentDir.js';
+import { displayCurrentDir } from '../utils/displayCurrentDir.js';
 
 export const compress = async (currentDir, pathToFile, pathToDest) => {
     let filename 
