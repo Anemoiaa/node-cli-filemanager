@@ -17,7 +17,7 @@ export const compress = async (currentDir, pathToFile, pathToDest) => {
 
     const read = fs.createReadStream(pathToFile);
     const write = fs.createWriteStream(pathToDest);
-    const brotliCompress = zlib.BrotliCompress();
+    const brotliCompress = zlib.createBrotliCompress();
     
     read.pipe(brotliCompress).pipe(write);
     write.on('finish', () => displayCurrentDir(currentDir));
