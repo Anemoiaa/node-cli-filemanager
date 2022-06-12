@@ -6,6 +6,7 @@ import * as nav from './navigation.js';
 import * as fs_oper from './fs_operations.js';
 import * as os_info from './get_os_info.js';
 import { calculateHash } from './calcHash.js';
+import * as zip from './zip.js';
 
 const welcomeUser = (username) => {
 	process.stdout.write(`Welcome to the File Manager, ${username}!\n`);
@@ -77,6 +78,11 @@ emitter.on('hash', (args) => {
 	const pathToFile = args[0];
 	calculateHash(currentDir, pathToFile);
 
+});
+
+emitter.on('compress', (args) => {
+	const [pathToFile, pathToDest] = args;
+	zip.compress(currentDir, pathToFile, pathToDest);
 });
 
 
