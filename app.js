@@ -85,6 +85,11 @@ emitter.on('compress', (args) => {
 	zip.compress(currentDir, pathToFile, pathToDest);
 });
 
+emitter.on('decompress', (args) => {
+	const [pathToFile, pathToDest] = args;
+	zip.decompress(currentDir, pathToFile, pathToDest);
+});
+
 
 emitter.once('.exit', () => {
 	process.stdout.write(`\nThank you for using File Manager, ${username}!`);
